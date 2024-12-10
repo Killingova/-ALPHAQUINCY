@@ -1,0 +1,150 @@
+{
+    "admins": [
+      {
+        "id": 1,
+        "username": "admin",
+        "password": "password123"
+      },
+      {
+        "id": 2,
+        "username": "kristin",
+        "password": "akoimarai1"
+      }
+    ],
+    "patients": [
+      {
+        "id": 1,
+        "name": "John Doe",
+        "age": 25,
+        "healthCardNumber": "A123456789"
+      },
+      {
+        "id": 2,
+        "name": "Jane Doe",
+        "age": 30,
+        "healthCardNumber": "B987654321"
+      }
+    ],
+    "appointments": [
+      {
+        "id": "012345678901234",
+        "patientId": 1,
+        "date": "2023-10-15",
+        "time": "10:00",
+        "doctor": "Dr. Müller",
+        "isValid": true,
+        "simulatedTimeDifference": 0
+      },
+      {
+        "id": "123456789012345",
+        "patientId": 2,
+        "date": "2023-10-16",
+        "time": "11:00",
+        "doctor": "Dr. Schmidt",
+        "isValid": true,
+        "simulatedTimeDifference": 20
+      },
+      {
+        "id": "234567890123456",
+        "patientId": 1,
+        "date": "2023-10-17",
+        "time": "09:30",
+        "doctor": "Dr. Meyer",
+        "isValid": true,
+        "simulatedTimeDifference": -25
+      },
+      {
+        "id": "345678901234567",
+        "patientId": 2,
+        "date": "2023-10-18",
+        "time": "11:15",
+        "doctor": "Dr. Klein",
+        "isValid": false
+      },
+      {
+        "id": "456789012345678",
+        "patientId": 1,
+        "date": "2023-10-19",
+        "time": "14:00",
+        "doctor": "Dr. Schulz",
+        "isValid": true,
+        "simulatedTimeDifference": 10
+      }
+    ],
+    "anamneseFields": [
+      {
+        "name": "allergie_unvertraeglichkeit",
+        "label": "Allergie / Unverträglichkeit",
+        "type": "text",
+        "printOption": true
+      },
+      {
+        "name": "kreatinin",
+        "label": "Kreatinin in mg/dl",
+        "type": "number",
+        "printOption": true
+      },
+      {
+        "name": "freitext",
+        "label": "Freitext",
+        "type": "text",
+        "printOption": true
+      },
+      {
+        "name": "geschlecht",
+        "label": "Geschlecht",
+        "type": "dropdown",
+        "options": ["männlich", "weiblich", "divers"],
+        "printOption": true
+      },
+      {
+        "name": "gewicht",
+        "label": "Gewicht in Kg",
+        "type": "number",
+        "printOption": true
+      },
+      {
+        "name": "schwanger",
+        "label": "Schwanger",
+        "type": "checkbox"
+      },
+      {
+        "name": "groesse",
+        "label": "Größe in cm",
+        "type": "number",
+        "printOption": true
+      },
+      {
+        "name": "stillend",
+        "label": "Stillend",
+        "type": "checkbox"
+      }
+    ],
+    "anamnesisData": [
+      {
+        "id": 1,
+        "appointmentId": "012345678901234",
+        "allergie_unvertraeglichkeit": "",
+        "kreatinin": "",
+        "freitext": "",
+        "geschlecht": "",
+        "gewicht": "",
+        "schwanger": false,
+        "groesse": "",
+        "stillend": false
+      }
+    ],
+    "contactInfoData": [
+      {
+        "id": 1,
+        "appointmentId": "012345678901234",
+        "phone": "",
+        "email": "",
+        "street": "",
+        "houseNumber": "",
+        "plz": "",
+        "city": ""
+      }
+    ]
+  }
+  
