@@ -30,27 +30,29 @@ function generateSteps(modules) {
         break;
       default:
         percentage = 0;
-        break;
     }
     steps.push({ id, name, percentage, icon });
   }
 
-  addStep('start', 'Start', 'StartIcon');
+  // Startschritt ist immer vorhanden
+  addStep('start', 'Anmeldung', 'StartIcon');
 
+  // Optionale Schritte abhängig von den aktivierten Modulen
   if (modules.qrCodeScan) addStep('qrScan', 'QR-Code Scan', 'QrCode');
   if (modules.eGKVerification) addStep('egkRead', 'eGK Lesen', 'CreditCard');
   if (modules.anamneseForm) addStep('anamnesis', 'Anamnese', 'ClipboardList');
-  if (modules.contactInfoForm) addStep('contactInfo', 'Kontaktinformationen', 'UserCheck');
+  if (modules.contactInfoForm) addStep('contactInfo', 'Kontakt', 'BookUser');
 
-  addStep('complete', 'Fertig', 'CheckCircle');
+  // Abschluss ist immer vorhanden
+  addStep('complete', 'Bestätigung', 'UserCheck');
 
   return steps;
 }
 
 export function ProgressBarProvider({ children }) {
   const { modules } = useSettings();
-
-  // Initial auf "start" setzen
+  
+  // Initial auf den "start"-Schritt setzen
   const [progress, setProgress] = useState(10);
   const [currentStepId, setCurrentStepId] = useState('start');
 
@@ -65,7 +67,7 @@ export function ProgressBarProvider({ children }) {
   }, [steps]);
 
   const resetProgress = useCallback(() => {
-    // Setzt den Fortschritt zurück auf "start"
+    // Zurück auf "start" setzen
     updateProgressByStepId('start');
   }, [updateProgressByStepId]);
 

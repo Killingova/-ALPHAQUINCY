@@ -1,3 +1,4 @@
+//src\pages\RegistrationPage.jsx
 import React from 'react';
 import { useDevice } from '../contexts/DeviceContext';
 import DeviceRegistrationForm from '../components/device/DeviceRegistrationForm';

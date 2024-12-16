@@ -35,7 +35,7 @@ export default function App() {
                     <div className="min-h-screen bg-gray-100 flex flex-col">
                       <Notification />
                       <Navbar />
-                      <header className="bg-white p-4 shadow">
+                      <header className="bg-blue-950 shadow"style={{ backgroundColor: '#002D5F' }} >
                         <ProgressBar />
                       </header>
                       <main className="p-4 flex-grow bg-white rounded mx-4 mt-4 mb-4">
