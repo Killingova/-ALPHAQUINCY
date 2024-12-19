@@ -1,11 +1,15 @@
+// src/components/layout/Footer.jsx
 import React from 'react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-white p-4 text-center border-t mt-auto">
-      <p className="text-sm text-gray-500">© {currentYear} Quincy Check-In. Alle Rechte vorbehalten.</p>
+    // Entferne hier 'fixed bottom-0', damit der Footer normal im Layoutfluss ist
+    <footer className="w-full bg-[#e4e4e4] p-8 text-center">
+      <p className="text-2xl text-black">
+        © {currentYear} Quincy Check-In. Alle Rechte vorbehalten.
+      </p>
     </footer>
   );
 };

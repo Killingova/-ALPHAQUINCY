@@ -1,25 +1,14 @@
 // src/components/admin/AdminPanel.jsx
 import React from 'react';
 
-export default function AdminPanel({ adminUser, handleLogout }) {
+export default function AdminPanel({ adminUser }) {
   return (
-    <>
-      <h1 style={{fontWeight:'bold', fontSize:'1.25rem', marginBottom:'1rem'}}>
-        Willkommen im Admin-Dashboard, {adminUser?.username}
-      </h1>
-      <button
-        style={{
-          background:'#dc2626',
-          color:'white',
-          padding:'0.5rem 1rem',
-          borderRadius:'5px',
-          border:'none',
-          marginBottom:'1rem'
-        }}
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
-    </>
+    <div className="mb-8 text-center">
+      {adminUser?.username && (
+        <p className="text-2xl text-gray-800 font-semibold mb-2">
+          Angemeldet als: {adminUser.username}
+        </p>
+      )}
+    </div>
   );
 }

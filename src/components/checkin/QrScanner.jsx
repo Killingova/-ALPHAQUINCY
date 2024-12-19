@@ -3,10 +3,15 @@ import React, { useRef, useState, useCallback } from 'react';
 import { useCamera } from '../../hooks/useCamera';
 import { useNotification } from '../../contexts/NotificationContext';
 import { useFlow } from '../../contexts/FlowContext';
+import { useProgressBar } from '../../contexts/ProgressBarContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function QrScanner() {
   const { addNotification } = useNotification();
-  const { goNextStep } = useFlow();
+  const { goNextStep, resetFlow } = useFlow();
+  const { resetProgress } = useProgressBar();
+  const navigate = useNavigate();
+
   const [error, setError] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -15,17 +20,13 @@ export default function QrScanner() {
     setError,
   });
 
-  // Startet die Kamera erst, wenn das Video-Element gemountet ist
-  // und stoppt sie, wenn das Video-Element unmounted wird.
   const startedRef = useRef(false);
 
   const videoRefCallback = useCallback((node) => {
     if (node && !startedRef.current) {
-      // Video-Element ist gemountet, Kamera starten
       startedRef.current = true;
       startCamera(node);
     } else if (!node && startedRef.current) {
-      // Video-Element ist unmounted, Kamera stoppen
       startedRef.current = false;
       stopCamera();
     }
@@ -53,7 +54,7 @@ export default function QrScanner() {
   };
 
   const handleScan = async (qrCodeData, stopCameraFn) => {
-    if (scanned) return; // Verhindert mehrfaches Ausführen
+    if (scanned) return;
     setScanned(true);
 
     try {
@@ -67,15 +68,23 @@ export default function QrScanner() {
     }
   };
 
+  const handleCancel = () => {
+    // Kamera stoppen
+    stopCamera();
+    // Flow und Progress zurücksetzen, damit beim nächsten Start alles neu beginnt
+    resetFlow();
+    resetProgress();
+    // Zur Startseite navigieren
+    navigate('/');
+  };
+
   return (
     <div className="max-w-lg mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Bitte scannen Sie Ihren QR-Code</h2>
       {error && (
-        <div className="bg-red-100 text-red-800 p-4 rounded mb-4">
+        <div className="bg-red-100 text-red-800 p-4 rounded mb-4 text-xl">
           {error}
         </div>
       )}
-      {/* Der ref-Callback wird aufgerufen, sobald das Video in den DOM kommt bzw. entfernt wird */}
       <video
         ref={videoRefCallback}
         className="w-full h-auto border border-gray-300 rounded-md shadow-md"
@@ -83,9 +92,19 @@ export default function QrScanner() {
         playsInline
         muted
       />
-      <p className="text-center mt-2 text-gray-500">
+      <p className="text-center mt-2 text-gray-500 text-xl">
         Bitte positionieren Sie den QR-Code vor der Kamera
       </p>
+
+      {/* Abbrechen-Button unterhalb des Videos */}
+      <div className="flex justify-center mt-6">
+        <button
+          onClick={handleCancel}
+          className="text-xl px-6 py-2 bg-[#919191] text-white font-semibold rounded hover:opacity-90"
+        >
+          Abbrechen
+        </button>
+      </div>
     </div>
   );
 }

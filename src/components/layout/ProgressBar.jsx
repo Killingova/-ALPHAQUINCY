@@ -48,7 +48,7 @@ export default function ProgressBar() {
       </div>
 
       {/* Fortschrittsbalken unter den Namen */}
-      <div className="relative w-full max-w-4xl m-4" style={{ height: '28px' }}>
+      <div className="relative w-full max-w-4xl m-6" style={{ height: '28px' }}>
         <div className="absolute w-full h-full rounded-full opacity-90" style={{ backgroundColor: '#F2F2F2' }}></div>
         <div
           className="absolute h-full rounded-full transition-all duration-500"

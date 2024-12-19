@@ -32,13 +32,16 @@ export default function App() {
               <BrowserRouter>
                 <DeviceProvider>
                   <FormProvider>
-                    <div className="min-h-screen bg-gray-100 flex flex-col">
+
+                    <div className="h-screen flex flex-col">
                       <Notification />
-                      <Navbar />
-                      <header className="bg-blue-950 shadow"style={{ backgroundColor: '#002D5F' }} >
+                      
+                      <header>
+                        <Navbar />
                         <ProgressBar />
                       </header>
-                      <main className="p-4 flex-grow bg-white rounded mx-4 mt-4 mb-4">
+
+                      <main className="flex-1 flex items-center justify-center p-4 overflow-hidden">
                         <Routes>
                           <Route path="/" element={<HomePage />} />
                           <Route path="/register-device" element={<RegistrationPage />} />
@@ -47,6 +50,7 @@ export default function App() {
                           <Route path="/check-in" element={<CheckInPage />} />
                         </Routes>
                       </main>
+                      
                       <Footer />
                     </div>
                   </FormProvider>

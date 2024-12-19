@@ -36,30 +36,49 @@ export default function AdminLoginForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} style={{ maxWidth: '300px', margin: '0 auto', padding:'1rem', background:'#f1f1f1', borderRadius:'5px' }}>
-      <h2 style={{fontWeight:'bold', marginBottom:'1rem'}}>Admin Login</h2>
-      {error && <p style={{color:'red', marginBottom:'1rem'}}>{error}</p>}
-      <div style={{marginBottom:'1rem'}}>
-        <label style={{display:'block', fontWeight:'bold', marginBottom:'0.5rem'}}>Benutzername:</label>
+    <form 
+      onSubmit={onSubmit} 
+      className="w-full max-w-sm bg-white"
+    >
+      {error && <p className="text-red-600 mb-4 text-xl">{error}</p>}
+
+      <div className="mb-6">
+        <label className="block mb-2 font-semibold text-gray-800 text-lg">Benutzername:</label>
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          style={{width:'100%', padding:'0.5rem', border:'1px solid #ccc'}}
+          className="w-full p-2 border border-black"
+          placeholder="admin"
         />
       </div>
-      <div style={{marginBottom:'1rem'}}>
-        <label style={{display:'block', fontWeight:'bold', marginBottom:'0.5rem'}}>Passwort:</label>
+
+      <div className="mb-8">
+        <label className="block mb-2 font-semibold text-gray-800 text-lg">Passwort:</label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{width:'100%', padding:'0.5rem', border:'1px solid #ccc'}}
+          className="w-full p-2 border border-black"
+          placeholder="••••••"
         />
       </div>
-      <button type="submit" style={{background:'#1d4ed8', color:'white', padding:'0.5rem 1rem', borderRadius:'5px', border:'none'}}>
-        Anmelden
-      </button>
+
+      <div className="flex space-x-4 justify-center">
+        <button
+          type="button"
+          onClick={() => navigate('/')}
+          className="text-xl px-6 py-2 bg-[#919191] text-white font-semibold rounded hover:opacity-90"
+        >
+          Abbrechen
+        </button>
+        <button
+          type="submit"
+          className="text-xl px-6 py-2 bg-[#64B400] text-white font-semibold rounded hover:opacity-90"
+        >
+          Anmelden
+        </button>
+      </div>
     </form>
   );
 }

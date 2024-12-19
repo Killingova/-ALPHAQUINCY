@@ -1,42 +1,53 @@
 // src/components/admin/ModuleSettings.jsx
 import React from 'react';
-import { Check } from 'lucide-react';
+import { CheckCircle, Circle } from 'lucide-react';
 
-export default function ModuleSettings({ modules, enableModule, disableModule, handleApplySettings }) {
+export default function ModuleSettings({ modules, enableModule, disableModule }) {
+  const handleToggle = (modName) => {
+    if (modules[modName]) {
+      disableModule(modName);
+    } else {
+      enableModule(modName);
+    }
+  };
+
   return (
-    <div>
-      <h2 className="font-bold text-base mb-2">Moduleinstellungen:</h2>
-      <ul className="list-none p-0">
-        {Object.keys(modules).map((modName) => {
-          const isActive = modules[modName];
+    <div className="mb-8">
+      <div className="text-center mb-6">
+        {/* Liste der Module */}
+        <ul className="space-y-4 text-2xl text-black">
+          {Object.keys(modules).map((modName) => {
+            const isActive = modules[modName];
+            const IconComponent = isActive ? CheckCircle : Circle;
 
-          return (
-            <li key={modName} className="mb-2 flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={isActive}
-                onChange={() => {
-                  if (isActive) {
-                    disableModule(modName);
-                  } else {
-                    enableModule(modName);
-                  }
-                }}
-              />
-              <span>{modName}</span>
-              {isActive && <Check className="text-green-600 w-4 h-4" />}
-            </li>
-          );
-        })}
-      </ul>
-
-      <div className="mt-4">
-        <button
-          onClick={handleApplySettings}
-          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
-        Speichern
-      </button>
+            return (
+              <li
+                key={modName}
+                className="flex items-center justify-center space-x-4 cursor-pointer"
+                onClick={() => handleToggle(modName)}
+              >
+                <IconComponent className={isActive ? "text-green-600" : "text-gray-800"} size={32} />
+                <span>{formatModuleName(modName)}</span>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );
+}
+
+// Hilfsfunktion, um den Modulnamen schöner darzustellen
+function formatModuleName(name) {
+  // z. B. aus "qrCodeScan" -> "QR-Code-Scan"
+  // aus "eGKVerification" -> "eGK-Verifizierung"
+  // aus "anamneseForm" -> "Anamnesebogen"
+  // aus "contactInfoForm" -> "Kontaktformular"
+  const mappings = {
+    qrCodeScan: 'QR-Code-Scan',
+    eGKVerification: 'eGK-Verifizierung',
+    anamneseForm: 'Anamnesebogen',
+    contactInfoForm: 'Kontaktformular'
+  };
+  return mappings[name] || name;
 }
