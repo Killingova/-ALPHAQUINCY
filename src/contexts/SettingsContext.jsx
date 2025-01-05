@@ -1,4 +1,5 @@
 // src/contexts/SettingsContext.jsx
+
 import React, { createContext, useContext, useState } from 'react';
 import { useNotification } from './NotificationContext';
 

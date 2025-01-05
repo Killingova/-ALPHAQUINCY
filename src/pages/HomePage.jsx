@@ -45,7 +45,7 @@ export default function HomePage() {
               onClick={() => navigate('/register-device')}
             >
               Registrieren
-            </span>, um die notwendigen Daten einzugeben. Wenn Sie nicht berechtigt sind, wenden Sie sich bitte an einen{' '}
+            </span>, um die notwendigen Daten einzugeben. <br />Wenn Sie nicht berechtigt sind, wenden Sie sich bitte an einen{' '}
             <span
               className="font-semibold cursor-pointer"
               style={{ color: '#002D5F' }}

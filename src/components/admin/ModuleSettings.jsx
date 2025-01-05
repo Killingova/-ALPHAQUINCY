@@ -1,33 +1,40 @@
 // src/components/admin/ModuleSettings.jsx
+
 import React from 'react';
 import { CheckCircle, Circle } from 'lucide-react';
 
 export default function ModuleSettings({ modules, enableModule, disableModule }) {
-  const handleToggle = (modName) => {
-    if (modules[modName]) {
-      disableModule(modName);
+  function toggleModule(name) {
+    if (modules[name]) {
+      disableModule(name);
     } else {
-      enableModule(modName);
+      enableModule(name);
     }
-  };
+  }
 
   return (
     <div className="mb-8">
       <div className="text-center mb-6">
-        {/* Liste der Module */}
         <ul className="space-y-4 text-2xl text-black">
-          {Object.keys(modules).map((modName) => {
-            const isActive = modules[modName];
-            const IconComponent = isActive ? CheckCircle : Circle;
+          {Object.keys(modules).map((name) => {
+            const active = modules[name];
+            const Icon = active ? CheckCircle : Circle;
 
             return (
               <li
-                key={modName}
-                className="flex items-center justify-center space-x-4 cursor-pointer"
-                onClick={() => handleToggle(modName)}
+                key={name}
+                onClick={() => toggleModule(name)}
+                className="flex items-center w-full px-4 cursor-pointer"
               >
-                <IconComponent className={isActive ? "text-green-600" : "text-gray-800"} size={32} />
-                <span>{formatModuleName(modName)}</span>
+                {/* Name links, nimmt den Platz nach rechts ein */}
+                <span className="flex-1 text-left">{formatModuleName(name)}</span>
+                
+                {/* Größeres Icon rechts, mit zusätzlichem Abstand zum Namen */}
+                <Icon
+                  className={active ? 'text-green-600' : 'text-gray-800'}
+                  size={48}
+                  style={{ marginLeft: '40px' }}
+                />
               </li>
             );
           })}
@@ -37,17 +44,12 @@ export default function ModuleSettings({ modules, enableModule, disableModule })
   );
 }
 
-// Hilfsfunktion, um den Modulnamen schöner darzustellen
 function formatModuleName(name) {
-  // z. B. aus "qrCodeScan" -> "QR-Code-Scan"
-  // aus "eGKVerification" -> "eGK-Verifizierung"
-  // aus "anamneseForm" -> "Anamnesebogen"
-  // aus "contactInfoForm" -> "Kontaktformular"
-  const mappings = {
+  const map = {
     qrCodeScan: 'QR-Code-Scan',
     eGKVerification: 'eGK-Verifizierung',
     anamneseForm: 'Anamnesebogen',
-    contactInfoForm: 'Kontaktformular'
+    contactInfoForm: 'Kontaktformular',
   };
-  return mappings[name] || name;
+  return map[name] || name;
 }

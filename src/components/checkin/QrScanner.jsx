@@ -3,14 +3,10 @@ import React, { useRef, useState, useCallback } from 'react';
 import { useCamera } from '../../hooks/useCamera';
 import { useNotification } from '../../contexts/NotificationContext';
 import { useFlow } from '../../contexts/FlowContext';
-import { useProgressBar } from '../../contexts/ProgressBarContext';
-import { useNavigate } from 'react-router-dom';
 
-export default function QrScanner() {
+export default function QrScanner({ onCancel }) {
   const { addNotification } = useNotification();
   const { goNextStep, resetFlow } = useFlow();
-  const { resetProgress } = useProgressBar();
-  const navigate = useNavigate();
 
   const [error, setError] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -44,11 +40,9 @@ export default function QrScanner() {
       if (!appt) {
         throw new Error('Ungültiger QR-Code oder Termin nicht gefunden.');
       }
-
       if (!appt.isValid) {
         throw new Error('Termin ist nicht gültig.');
       }
-
       return { success: true };
     }
   };
@@ -56,7 +50,6 @@ export default function QrScanner() {
   const handleScan = async (qrCodeData, stopCameraFn) => {
     if (scanned) return;
     setScanned(true);
-
     try {
       await appointmentService.confirmAppointment(qrCodeData);
       stopCameraFn();
@@ -68,14 +61,10 @@ export default function QrScanner() {
     }
   };
 
-  const handleCancel = () => {
-    // Kamera stoppen
+  const handleCancelInternal = () => {
     stopCamera();
-    // Flow und Progress zurücksetzen, damit beim nächsten Start alles neu beginnt
-    resetFlow();
-    resetProgress();
-    // Zur Startseite navigieren
-    navigate('/');
+    // Durch die von außen übergebene onCancel-Funktion wird auch resetFlow und resetProgress aufgerufen.
+    onCancel();
   };
 
   return (
@@ -99,7 +88,7 @@ export default function QrScanner() {
       {/* Abbrechen-Button unterhalb des Videos */}
       <div className="flex justify-center mt-6">
         <button
-          onClick={handleCancel}
+          onClick={handleCancelInternal}
           className="text-xl px-6 py-2 bg-[#919191] text-white font-semibold rounded hover:opacity-90"
         >
           Abbrechen
