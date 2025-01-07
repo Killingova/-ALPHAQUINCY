@@ -71,14 +71,7 @@ export default function DeviceRegistrationForm() {
       </div>
 
       <div className="flex space-x-4 justify-center">
-        <button
-          type="button"
-          onClick={() => navigate('/')}
-          className="text-2xl inline-block px-4 py-2 rounded font-semibold transition"
-            style={{ backgroundColor: '#919191', color: '#FFFFFF' }}
-        >
-          Abbrechen
-        </button>
+
         <button
           type="submit"
           className="text-2xl inline-block px-6 py-2 rounded font-semibold transition"

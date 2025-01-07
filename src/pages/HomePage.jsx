@@ -35,7 +35,7 @@ export default function HomePage() {
         <div className="text-center">
           <p className="text-gray-700 mb-8 text-xl leading-relaxed">
             Zertifiziert nach § Abs. und § Abs. SGB V <br />
-            Zertifikatsnummer: Y/308/1407/27/244
+            Zertifikatsnummer: Y/111/2222/11/211
           </p>
           <p className="text-2xl mb-4 leading-relaxed">
             Bitte klicken Sie auf{' '}
@@ -55,13 +55,6 @@ export default function HomePage() {
             </span>.
           </p>
           <div className="flex justify-center space-x-6 mt-8 p-4">
-            <button
-              onClick={showAdminNotification}
-              className="text-xl inline-block px-8 py-4 rounded font-semibold hover:opacity-90 transition"
-              style={{ backgroundColor: '#919191', color: '#FFFFFF' }}
-            >
-              Abbrechen
-            </button>
             <button
               onClick={() => navigate('/register-device')}
               className="text-xl inline-block px-8 py-4 rounded font-semibold hover:opacity-90 transition"
@@ -97,13 +90,7 @@ export default function HomePage() {
         </div>
 
         <div className="flex justify-center space-x-6 p-4">
-          <button
-            onClick={showAdminNotification}
-            className="text-2xl inline-block px-4 py-2 rounded font-semibold transition"
-            style={{ backgroundColor: '#919191', color: '#FFFFFF' }}
-          >
-            Abbrechen
-          </button>
+
           <button
             onClick={() => navigate('/check-in')}
             className="text-2xl inline-block px-4 py-2 rounded font-semibold transition"

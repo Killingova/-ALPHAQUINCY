@@ -39,7 +39,7 @@ function generateSteps(modules) {
 
   // Optionale Schritte abhängig von den aktivierten Modulen
   if (modules.qrCodeScan) addStep('qrScan', 'QR-Code Scan', 'QrCode');
-  if (modules.eGKVerification) addStep('egkRead', 'eGK Lesen', 'CreditCard');
+  if (modules.eGKVerification) addStep('egkRead', 'eGK Lesen', 'IdCard');
   if (modules.anamneseForm) addStep('anamnesis', 'Anamnese', 'ClipboardList');
   if (modules.contactInfoForm) addStep('contactInfo', 'Kontakt', 'BookUser');
 

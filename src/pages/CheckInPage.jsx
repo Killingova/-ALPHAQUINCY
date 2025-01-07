@@ -88,7 +88,7 @@ export default function CheckInPage() {
             </div>
           </div>
           <h2 className="text-4xl font-bold mb-6" style={{ color: '#002D5F' }}>
-            Bitte scannen Sie Ihren QR-Code
+            Bitte scannen Sie Ihren <br />QR-Code
           </h2>
           <QrScanner onCancel={handleCancel} />
         </div>
